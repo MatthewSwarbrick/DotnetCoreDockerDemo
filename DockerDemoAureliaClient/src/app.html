@@ -7,11 +7,17 @@
           <img src="assets/moby.png" height="45" class="d-inline-block align-top logo" alt="">
           Docker Demo
       </a>
-      <div class="nav navbar-nav navbar-right">
-          <div if.bind="!userLoggedIn" class="nav-item">
-              <a class="nav-link" route-href="login">Login</a>
-          </div>
-      </div>
+      <ul class="navbar-nav flex-row menu-list">
+          <li if.bind="!userLoggedIn" class="nav-item">
+              <a class="nav-link pointer" route-href="login">Login</a>
+          </li>
+          <li if.bind="!userLoggedIn" class="nav-item">
+              <a class="nav-link pointer" route-href="">Register</a>
+          </li>
+          <li if.bind="userLoggedIn" class="nav-item">
+              <a class="nav-link pointer" click.delegate="logout()">Logout</a>
+          </li>
+      </ul>
   </nav>
   <div class="container">
       <router-view></router-view>

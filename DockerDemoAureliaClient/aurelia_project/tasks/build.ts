@@ -4,6 +4,8 @@ import transpile from './transpile';
 import processMarkup from './process-markup';
 import processCSS from './process-css';
 import processFonts from './process-fonts';
+import copyToWwwRoot from './copy-to-wwwroot';
+import cleanWwwRoot from './clean-wwwroot';
 import copyFiles from './copy-files';
 import watch from './watch';
 import * as project from '../aurelia.json';
@@ -17,7 +19,9 @@ let build = gulp.series(
     processFonts,
     copyFiles
   ),
-  writeBundles
+  writeBundles,
+  cleanWwwRoot,
+  copyToWwwRoot
 );
 
 let main;

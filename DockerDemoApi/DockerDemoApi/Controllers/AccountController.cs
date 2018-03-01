@@ -24,7 +24,7 @@ namespace DockerDemoApi.Controllers
         }
 
         [HttpPost("sign-in")]
-        public async Task<IActionResult> SignIn([FromBody] CredentialsModel Credentials)
+        public async Task<IActionResult> SignIn(CredentialsModel Credentials)
         {
             var result = await signInManager.PasswordSignInAsync(Credentials.Username, Credentials.Password, false, false);
             if (result.Succeeded)

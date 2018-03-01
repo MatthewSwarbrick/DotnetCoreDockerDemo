@@ -8,6 +8,8 @@ import transpile from './transpile';
 import processMarkup from './process-markup';
 import processCSS from './process-css';
 import copyFiles from './copy-files';
+import copyToWwwRoot from './copy-to-wwwroot';
+import cleanWwwRoot from './clean-wwwroot';
 
 const debounceWaitTime = 100;
 let isBuilding = false;
@@ -107,7 +109,7 @@ let refresh = debounce(() => {
         log('Watcher: Found more pending changes after finishing build, triggering next one...');
         refresh();
       }
-    }
+    }, cleanWwwRoot, copyToWwwRoot
   );
 
   toExecute();

@@ -1,14 +1,10 @@
-﻿using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 using DockerDemoApi.Domain;
 using DockerDemoApi.Orm;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -73,6 +69,8 @@ namespace DockerDemoApi
 
             app.UseAuthentication();
             app.UseMvc();
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
         }
     }
 }
