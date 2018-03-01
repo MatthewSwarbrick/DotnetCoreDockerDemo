@@ -1,3 +1,27 @@
 <template>
-    LOGIN
-</template>
+        <div class="container mt-5 w-75">
+            <div class="card card-outline-danger mb-3 text-center">
+                <div class="card-block">
+                    <h3 class="card-title">Log into Docker Demo!</h3>
+                    <hr />
+                    <form>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                            <input type="text" class="form-control" placeholder="Username" value.bind="username">
+                        </div>
+                        <br />
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                            <input type="password" class="form-control" placeholder="Password" value.bind="password">
+                        </div>
+                        <hr />
+                        <button type="submit" class="btn btn-lg btn-outline-danger pointer" click.delegate="login()">Log in</button>
+                    </form>
+                </div>
+                <div class="card-block">
+                    <a class="card-link text-muted float-left" href="#"><i class="fa fa-lock"></i> Forgot your password?</a>
+                    <a class="card-link text-muted float-right" href="#">Create an account</a>
+                </div>
+            </div>
+        </div>
+    </template>

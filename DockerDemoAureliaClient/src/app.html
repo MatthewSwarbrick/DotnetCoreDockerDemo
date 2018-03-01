@@ -1,3 +1,19 @@
 <template>
-  <router-view></router-view>>
+  <require from="./less/app.css"></require>
+  <require from="bootstrap/css/bootstrap.css"></require>
+
+  <nav class="navbar navbar-light bg-faded d-flex flex-row justify-content-between">
+      <a class="navbar-brand" route-href="home">
+          <img src="assets/moby.png" height="45" class="d-inline-block align-top logo" alt="">
+          Docker Demo
+      </a>
+      <div class="nav navbar-nav navbar-right">
+          <div if.bind="!userLoggedIn" class="nav-item">
+              <a class="nav-link" route-href="login">Login</a>
+          </div>
+      </div>
+  </nav>
+  <div class="container">
+      <router-view></router-view>
+  </div>
 </template>
