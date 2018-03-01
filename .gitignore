@@ -1,2 +1,9 @@
 DockerDemoApi/.vs/
 DockerDemoApi/DockerDemoApi/obj/
+DockerDemoApi/DockerDemoApi.Domain/bin/
+DockerDemoApi/DockerDemoApi.Domain/obj/
+DockerDemoApi/DockerDemoApi.Orm/bin/
+DockerDemoApi/DockerDemoApi.Orm/obj/
+DockerDemoApi/DockerDemoApi.Specs/bin/
+DockerDemoApi/DockerDemoApi.Specs/obj/
+DockerDemoApi/DockerDemoApi/bin/

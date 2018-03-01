@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using DockerDemoApi.Domain;
+using DockerDemoApi.Orm;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace DockerDemoApi
 {
@@ -23,6 +21,12 @@ namespace DockerDemoApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddEntityFrameworkSqlServer().AddDbContext<UserDbContext>(opt => opt.UseInMemoryDatabase("DockerDemoApi"));
+
+            services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<UserDbContext>();
+
+            services.Configure<JWTSettings>(Configuration.GetSection("JWTSettings"));
+
             services.AddMvc();
         }
 
@@ -34,6 +38,7 @@ namespace DockerDemoApi
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseAuthentication();
             app.UseMvc();
         }
     }
