@@ -9,11 +9,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
+    <PackageReference Include="JWT" Version="3.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
   </ItemGroup>
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DockerDemoApi.Orm\DockerDemoApi.Orm.csproj" />
   </ItemGroup>
 
 </Project>
