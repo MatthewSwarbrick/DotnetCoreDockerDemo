@@ -8,3 +8,5 @@ DockerDemoApi/DockerDemoApi.Specs/bin/
 DockerDemoApi/DockerDemoApi.Specs/obj/
 DockerDemoApi/DockerDemoApi/bin/
 Dockerfiles/Development/publish/
+DockerDemoApi/DockerDemoApi.Common/bin/
+DockerDemoApi/DockerDemoApi.Common/obj/
