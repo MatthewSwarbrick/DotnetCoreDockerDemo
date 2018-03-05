@@ -24,13 +24,13 @@ namespace DockerDemoApi.Controllers
         }
 
         [HttpPost("sign-in")]
-        public async Task<IActionResult> SignIn(CredentialsModel Credentials)
+        public async Task<JsonResult> SignIn(CredentialsModel Credentials)
         {
             var result = await signInManager.PasswordSignInAsync(Credentials.Username, Credentials.Password, false, false);
             if (result.Succeeded)
             {
                 var user = await userManager.FindByNameAsync(Credentials.Username);
-                return new JsonResult(new Dictionary<string, object>
+                return new JsonResult(new Dictionary<string, string>
                 {
                     { "access_token", AuthenticationHelper.GetAccessToken(user.Email, options) },
                     { "id_token", AuthenticationHelper.GetIdToken(user, options) }

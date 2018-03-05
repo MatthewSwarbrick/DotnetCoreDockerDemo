@@ -4,4 +4,17 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="5.1.2" />
+    <PackageReference Include="SimpleInjector" Version="4.0.12" />
+    <PackageReference Include="Xbehave" Version="2.3.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DockerDemoApi.Common\DockerDemoApi.Common.csproj" />
+    <ProjectReference Include="..\DockerDemoApi.Orm\DockerDemoApi.Orm.csproj" />
+    <ProjectReference Include="..\DockerDemoApi\DockerDemoApi.csproj" />
+  </ItemGroup>
+
 </Project>
