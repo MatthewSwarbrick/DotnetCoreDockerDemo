@@ -39,5 +39,16 @@ namespace DockerDemoApi.Controllers
 
             return new JsonResult("Unable to sign in") { StatusCode = 400 };
         }
+
+        [HttpPost("register")]
+        public async Task Register(RegisterModel model)
+        {
+            var user = new User
+            {
+                UserName = model.Username
+            };
+
+            await userManager.CreateAsync(user, model.Password);
+        }
     }
 }
