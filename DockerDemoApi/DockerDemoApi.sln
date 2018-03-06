@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DockerDemoApi.Specs", "Dock
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DockerDemoApi.Common", "DockerDemoApi.Common\DockerDemoApi.Common.csproj", "{94EF6B05-112C-452B-BA70-D333D7FDC293}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DockerDemoApi.Migrations", "DockerDemoApi.Migrations\DockerDemoApi.Migrations.csproj", "{8FC63BA4-FEF5-434C-B027-BDE1849A7047}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DockerDemoApi.Migrations", "DockerDemoApi.Migrations\DockerDemoApi.Migrations.csproj", "{8FC63BA4-FEF5-434C-B027-BDE1849A7047}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DockerDemoApi.CommandQuery", "DockerDemoApi.CommandQuery\DockerDemoApi.CommandQuery.csproj", "{A6CF2BCC-3B60-465D-B9E3-F603317F8530}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{8FC63BA4-FEF5-434C-B027-BDE1849A7047}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FC63BA4-FEF5-434C-B027-BDE1849A7047}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FC63BA4-FEF5-434C-B027-BDE1849A7047}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6CF2BCC-3B60-465D-B9E3-F603317F8530}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6CF2BCC-3B60-465D-B9E3-F603317F8530}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6CF2BCC-3B60-465D-B9E3-F603317F8530}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6CF2BCC-3B60-465D-B9E3-F603317F8530}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

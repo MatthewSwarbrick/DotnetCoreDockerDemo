@@ -22,10 +22,12 @@ namespace DockerDemoApi.Specs.Steps
 
         public AccountSteps(
             AccountController controller,
-            SignInManager<User> signInManager)
+            SignInManager<User> signInManager,
+            ISession session)
         {
             this.controller = controller;
             this.signInManager = signInManager as TestSignInManager;
+            this.session = session;
         }
 
         public void StoreLoginCredentials(dynamic loginCredentials)
