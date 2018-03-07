@@ -34,7 +34,7 @@ jobs:
           command: cd Dockerfiles/Production && chmod 755 createProductionImage.sh && ./createProductionImage.sh
       - run:
           name: Push to docker hub
-          command: docker push mswarbrick/dockerdemoapi:prod
+          command: docker login -u="$DOCKERUSERNAME" -p="$DOCKERPASSWORD" && docker push mswarbrick/dockerdemoapi:prod
 
 workflows:
   version: 2
