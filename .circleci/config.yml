@@ -9,13 +9,13 @@ jobs:
       - checkout
       - run: 
           name: Install prerequisites
-          command: cd Scripts/ && ./installCiPrerequisites.sh
+          command: cd Scripts/ && chmod 755 installCiPrerequisites.sh && ./installCiPrerequisites.sh
       - run:
           name: Building Docker Demo Api project
           command: cd DockerDemoApi/ && dotnet restore ./DockerDemoApi.sln && dotnet build ./DockerDemoApi.sln
       - run:
           name: Run Specs db
-          command: cd Scripts/ && ./startCiSpecsDb.sh
+          command: cd Scripts/ && chmod 755 startCiSpecsDb.sh && ./startCiSpecsDb.sh
       - run:
           name: Running tests
           command: cd DockerDemoApi/DockerDemoApi.Specs/ && dotnet test
