@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Reflection;
 using Microsoft.Extensions.Configuration;
 
 namespace DockerDemoApi.Specs
@@ -10,7 +11,7 @@ namespace DockerDemoApi.Specs
             get
             {
                 var configurationBuilder = new ConfigurationBuilder();
-                var path = Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json");
+                var path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "appsettings.json");
                 configurationBuilder.AddJsonFile(path, false);
 
                 var root = configurationBuilder.Build();

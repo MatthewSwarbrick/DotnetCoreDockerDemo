@@ -8,7 +8,6 @@ namespace DockerDemoApi.Orm
     {
         public UserDbContext(DbContextOptions<UserDbContext> options) : base(options)
         {
-            Database.EnsureCreated();
         }
     }
 }
