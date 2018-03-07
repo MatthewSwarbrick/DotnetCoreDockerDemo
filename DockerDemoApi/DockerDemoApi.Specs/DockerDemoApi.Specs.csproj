@@ -2,9 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <ApplicationIcon />
+    <OutputType>Library</OutputType>
+    <StartupObject />
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dapper" Version="1.50.4" />
     <PackageReference Include="FluentAssertions" Version="5.1.2" />
     <PackageReference Include="SimpleInjector" Version="4.0.12" />
     <PackageReference Include="Xbehave" Version="2.3.0" />
@@ -15,6 +19,12 @@
     <ProjectReference Include="..\DockerDemoApi.Common\DockerDemoApi.Common.csproj" />
     <ProjectReference Include="..\DockerDemoApi.Orm\DockerDemoApi.Orm.csproj" />
     <ProjectReference Include="..\DockerDemoApi\DockerDemoApi.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using DockerDemoApi.Domain;
+using DockerDemoApi.DomainValidators;
 using DockerDemoApi.Helpers;
 using DockerDemoApi.Models;
 using Microsoft.AspNetCore.Identity;
@@ -12,14 +13,20 @@ namespace DockerDemoApi.Controllers
     [Route("api/[controller]")]
     public class AccountController : Controller
     {
+        readonly RegisterAccountValidator registerAccountValidator;
         readonly UserManager<User> userManager;
         readonly SignInManager<User> signInManager;
         readonly JWTSettings options;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IOptions<JWTSettings> optionsAccessor)
+        public AccountController(
+            UserManager<User> userManager, 
+            SignInManager<User> signInManager, 
+            IOptions<JWTSettings> optionsAccessor, 
+            RegisterAccountValidator registerAccountValidator)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.registerAccountValidator = registerAccountValidator;
             options = optionsAccessor.Value;
         }
 
@@ -38,6 +45,19 @@ namespace DockerDemoApi.Controllers
             }
 
             return new JsonResult("Unable to sign in") { StatusCode = 400 };
+        }
+
+        [HttpPost("register")]
+        public async Task Register(RegisterModel model)
+        {
+            registerAccountValidator.Validate(model);
+
+            var user = new User
+            {
+                UserName = model.Username
+            };
+
+            await userManager.CreateAsync(user, model.Password);
         }
     }
 }

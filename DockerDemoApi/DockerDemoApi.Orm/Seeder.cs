@@ -7,7 +7,7 @@ namespace DockerDemoApi.Orm
     {
         public static async void SeedData(UserManager<User> userManager)
         {
-            if (userManager.FindByNameAsync("MSwarbrick").Result == null)
+            if (userManager.FindByNameAsync("DemoUser").Result == null)
             {
                 var user = new User
                 {

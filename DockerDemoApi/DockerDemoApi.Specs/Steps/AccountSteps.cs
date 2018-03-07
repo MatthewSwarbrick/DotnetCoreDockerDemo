@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using DockerDemoApi.Controllers;
 using DockerDemoApi.Domain;
 using DockerDemoApi.Models;
+using DockerDemoApi.Orm;
 using DockerDemoApi.Specs.Fakes;
 using FluentAssertions;
 using Microsoft.AspNetCore.Identity;
@@ -16,13 +18,16 @@ namespace DockerDemoApi.Specs.Steps
 
         readonly AccountController controller;
         readonly TestSignInManager signInManager;
+        readonly ISession session;
 
         public AccountSteps(
             AccountController controller,
-            SignInManager<User> signInManager)
+            SignInManager<User> signInManager,
+            ISession session)
         {
             this.controller = controller;
             this.signInManager = signInManager as TestSignInManager;
+            this.session = session;
         }
 
         public void StoreLoginCredentials(dynamic loginCredentials)
@@ -31,12 +36,36 @@ namespace DockerDemoApi.Specs.Steps
             signInManager.Password = loginCredentials.Password;
         }
 
+        public void StoreAccount(dynamic accountDetails)
+        {
+            string username = accountDetails.Username;
+            session.Execute(@"
+                INSERT INTO AspNetUsers (Id, UserName, AccessFailedCount, EmailConfirmed, LockoutEnabled, PhoneNumberConfirmed, TwoFactorEnabled) 
+                Values (@id, @username, 0, 0, 0, 0, 0)",
+                new
+                {
+                    id = Guid.NewGuid().ToString(),
+                    username
+                });
+        }
+
         public async Task LogIn(dynamic logInDetails)
         {
             loginResult = await controller.SignIn(new CredentialsModel
             {
                 Username = logInDetails.Username,
                 Password = logInDetails.Password
+            });
+        }
+
+        public async Task RegisterAccount(dynamic registerDetails)
+        {
+            await controller.Register(new RegisterModel
+            {
+                Username = registerDetails.Username,
+                Password = registerDetails.Password,
+                ConfirmPassword = registerDetails.ConfirmPassword,
+                AgreeToTermsAndConditions = registerDetails.AgreeToTermsAndConditions
             });
         }
 
@@ -51,6 +80,12 @@ namespace DockerDemoApi.Specs.Steps
         {
             loginResult.StatusCode.Should().Be(400);
             loginResult.Value.Should().Be("Unable to sign in");
+        }
+
+        public void AssertAccountExists(string username)
+        {
+            var result = session.Query<User>(@"select * from AspNetUsers where Username = @username", new { username });
+            result.Should().HaveCount(1);
         }
     }
 }

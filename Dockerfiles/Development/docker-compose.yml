@@ -1,0 +1,22 @@
+version: '2.1'
+services:
+  mssql:
+    image: microsoft/mssql-server-windows-developer:2017-GA
+    container_name: mssql
+    ports:
+      - "1422:1433"
+    environment:
+      SA_PASSWORD: "1Strongpassword!"
+      ACCEPT_EULA: "Y"
+  webapp:
+    image: mswarbrick/dockerdemoapi:dev
+    depends_on:
+      - mssql
+    container_name: webbapp
+    ports:
+      - "5555:80"
+
+networks:
+  default:
+    external:
+      name: nat

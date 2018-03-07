@@ -10,3 +10,7 @@ DockerDemoApi/DockerDemoApi/bin/
 Dockerfiles/Development/publish/
 DockerDemoApi/DockerDemoApi.Common/bin/
 DockerDemoApi/DockerDemoApi.Common/obj/
+DockerDemoApi/DockerDemoApi.Migrations/obj/
+DockerDemoApi/DockerDemoApi.Migrations/bin/
+DockerDemoApi/DockerDemoApi.CommandQuery/bin/
+DockerDemoApi/DockerDemoApi.CommandQuery/obj/
