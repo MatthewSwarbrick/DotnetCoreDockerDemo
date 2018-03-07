@@ -23,9 +23,14 @@ namespace DockerDemoApi
     {
         readonly Container container = new Container();
 
-        public Startup(IConfiguration configuration)
+        public Startup(IHostingEnvironment env)
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddEnvironmentVariables();
+            Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -109,8 +114,6 @@ namespace DockerDemoApi
             container.CrossWire<SignInManager<User>>(app);
             container.CrossWire<IOptions<JWTSettings>>(app);
 
-
-            //todo set up container to use real db - use StartLocalDb.ps1 for now
             container.Register<Orm.ISession>(() =>
                  new OrmSession(new SqlConnection(Configuration.GetConnectionString("DockerDemoApi"))), Lifestyle.Scoped);
         }

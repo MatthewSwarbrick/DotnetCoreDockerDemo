@@ -33,6 +33,9 @@ jobs:
           name: Create new production image
           command: cd Dockerfiles/Production && chmod 755 createProductionImage.sh && ./createProductionImage.sh
       - run:
+          name: Apply production db migrations
+          command: cd Scripts/ && chmod 755 applyProductionDbMigrations.sh && ./applyProductionDbMigrations.sh
+      - run:
           name: Push to docker hub
           command: docker login -u="$DOCKERUSERNAME" -p="$DOCKERPASSWORD" && docker push mswarbrick/dockerdemoapi:prod
 
