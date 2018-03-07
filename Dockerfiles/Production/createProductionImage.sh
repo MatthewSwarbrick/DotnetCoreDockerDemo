@@ -7,7 +7,7 @@ cd ../../DockerDemoApi
 echo Publishing docker demo api
 dotnet clean
 dotnet build
-dotnet publish -o ../Dockerfiles/Production/publish
+dotnet publish -o ../../Dockerfiles/Production/publish
 cd ../Dockerfiles/Production
 
 echo Building production image
