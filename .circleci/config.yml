@@ -20,6 +20,22 @@ jobs:
           name: Running tests
           command: cd DockerDemoApi/DockerDemoApi.Specs/ && dotnet test
 
+  deploy-job:
+    working_directory: ~/temp/
+    machine:
+      image: circleci/classic:latest
+    steps:
+      - checkout
+      - run: 
+          name: Install prerequisites
+          command: cd Scripts/ && chmod 755 installCiDeploymentPrerequisites.sh && ./installCiDeploymentPrerequisites.sh
+      - run:
+          name: Create new production image
+          command: cd Dockerfiles/Production && chmod 755 createProductionImage.sh && ./createProductionImage.sh
+      - run:
+          name: Push to docker hub
+          command: docker push mswarbrick/dockerdemoapi:prod
+
 workflows:
   version: 2
   build-deploy:
@@ -28,4 +44,7 @@ workflows:
           filters:
             branches:
               only: master
+      - deploy-job:
+          requires:
+            - build-test
 

@@ -5,3 +5,4 @@ dotnet build
 dotnet publish -o ..\..\Dockerfiles\Development\publish
 cd ..\Dockerfiles\Development
 docker build -t mswarbrick/dockerdemoapi:dev .
+docker push mswarbrick/dockerdemoapi:dev
