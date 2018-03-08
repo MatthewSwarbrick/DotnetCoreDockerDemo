@@ -1,20 +1,47 @@
-version: '2.1'
+version: '2.3'
 services:
   mssql:
     image: microsoft/mssql-server-windows-developer:2017-GA
     container_name: mssql
     ports:
-      - "1422:1433"
+      - "1433:1433"
     environment:
       SA_PASSWORD: "1Strongpassword!"
       ACCEPT_EULA: "Y"
+
+  setupdb:
+    image: microsoft/mssql-server-windows-developer:2017-GA
+    container_name: setupdb
+    depends_on:
+      mssql:
+        condition: service_healthy
+    volumes:
+      - .\Scripts:C:\Scripts
+    working_dir: \Scripts
+    command: Powershell.exe -executionpolicy remotesigned -File SetUpDevDb.ps1
+
+  dbmigrations:
+    image: microsoft/aspnetcore:2.0
+    container_name: dbmigrations
+    depends_on:
+      setupdb:
+        condition: service_started
+    volumes:
+        - .\publish:C:\app
+    working_dir: \app
+    command: dotnet DockerDemoApi.Migrations.dll "Server=mssql;Database=DockerDemoApiDev;User Id=DockerDemoApiUser;Password=f1719ef5-cde1-463f-a0a8-b1d8baa0c26d"
+
   webapp:
     image: mswarbrick/dockerdemoapi:dev
     depends_on:
-      - mssql
+      dbmigrations:
+        condition: service_started
     container_name: webbapp
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
     ports:
       - "5555:80"
+    working_dir: \app
 
 networks:
   default:

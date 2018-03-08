@@ -85,8 +85,6 @@ namespace DockerDemoApi
             InitializeContainer(app);
             container.Verify();
 
-            Seeder.SeedData(userManager);
-
             app.UseAuthentication();
             app.UseMvc();
             app.UseDefaultFiles();
