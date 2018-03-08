@@ -1,0 +1,40 @@
+<template>
+    <div class="container mt-5 w-75">
+        <div class="card card-outline-danger mb-3 text-center">
+            <div class="card-block">
+                <h3 class="card-title">Register new account</h3>
+                <hr />
+                <form>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                        <input type="text" class="form-control" placeholder="Username" value.bind="username">
+                    </div>
+                    <br />
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                        <input type="password" class="form-control" placeholder="Password" value.bind="password">
+                    </div>
+                    <br />
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                        <input type="password" class="form-control" placeholder="Confirm Password" value.bind="confirmPassword">
+                    </div>
+                    <br />
+                    <div class="input-group">
+                        <div class="checkbox checkbox-primary">
+                            <input id="checkbox-signup" type="checkbox" checked.bind="agreeToTerms">
+                            <label for="checkbox-signup" class="ml-2">
+                                <span>I accept <a class="text-primary pointer">Terms and Conditions</a></span>
+                            </label>
+                        </div>
+                    </div>
+                    <hr />
+                    <button type="submit" class="btn btn-lg btn-outline-danger pointer" click.delegate="register()">Sign up</button>
+                </form>
+            </div>
+            <div class="card-block">
+                <a class="card-link text-muted" href="#/login">Already have an account?</a>
+            </div>
+        </div>
+    </div>
+</template>
