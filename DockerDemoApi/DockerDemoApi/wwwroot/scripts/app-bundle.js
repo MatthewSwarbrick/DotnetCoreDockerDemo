@@ -22,6 +22,7 @@ define('app',["require", "exports", "aurelia-framework", "aurelia-event-aggregat
             config.addPipelineStep('authorize', authorizeStep_1.AuthorizeStep);
             config.map([
                 { route: '', moduleId: './home/home', name: 'home', title: 'Home', auth: true },
+                { route: 'register', moduleId: './register/register', name: 'register', title: 'Register' },
                 { route: 'login', moduleId: './login/login', name: 'login', title: 'Login' }
             ]);
             config.mapUnknownRoutes({ route: '', moduleId: './home/home', name: 'home', title: 'Home', auth: true });
@@ -192,6 +193,46 @@ define('login/login',["require", "exports", "aurelia-framework", "aurelia-router
 
 
 
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+define('register/register',["require", "exports", "aurelia-framework", "aurelia-router", "../common/server"], function (require, exports, aurelia_framework_1, aurelia_router_1, server_1) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var Register = (function () {
+        function Register(server, router) {
+            this.server = server;
+            this.router = router;
+        }
+        Register.prototype.register = function () {
+            var _this = this;
+            var modelToSend = {
+                username: this.username,
+                password: this.password,
+                confirmPassword: this.confirmPassword,
+                agreeToTermsAndConditions: this.agreeToTerms
+            };
+            this.server.post("account/register", modelToSend).then(function (data) {
+                _this.router.navigateToRoute("login");
+            });
+        };
+        Register = __decorate([
+            aurelia_framework_1.inject(server_1.Server, aurelia_router_1.Router),
+            __metadata("design:paramtypes", [server_1.Server, aurelia_router_1.Router])
+        ], Register);
+        return Register;
+    }());
+    exports.Register = Register;
+});
+
+
+
 define('resources/index',["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
@@ -202,8 +243,9 @@ define('resources/index',["require", "exports"], function (require, exports) {
 
 
 
-define('text!app.html', ['module'], function(module) { module.exports = "<template><require from=\"./less/app.css\"></require><require from=\"bootstrap/css/bootstrap.css\"></require><nav class=\"navbar navbar-light bg-faded d-flex flex-row justify-content-between\"><a class=\"navbar-brand\" route-href=\"home\"><img src=\"assets/moby.png\" height=\"45\" class=\"d-inline-block align-top logo\" alt=\"\"> Docker Demo</a><ul class=\"navbar-nav flex-row menu-list\"><li if.bind=\"!userLoggedIn\" class=\"nav-item\"><a class=\"nav-link pointer\" route-href=\"login\">Login</a></li><li if.bind=\"!userLoggedIn\" class=\"nav-item\"><a class=\"nav-link pointer\" href=\"#\">Register</a></li><li if.bind=\"userLoggedIn\" class=\"nav-item\"><a class=\"nav-link pointer\" click.delegate=\"logout()\">Logout</a></li></ul></nav><div class=\"container\"><router-view></router-view></div></template>"; });
-define('text!home/home.html', ['module'], function(module) { module.exports = "<template><div class=\"container mt-5 w-75\"><div class=\"card card-outline-danger mb-3 text-center\"><div class=\"card-block\"><h3 class=\"card-title\">Welcome!</h3></div></div></div></template>"; });
+define('text!app.html', ['module'], function(module) { module.exports = "<template><require from=\"./less/app.css\"></require><require from=\"bootstrap/css/bootstrap.css\"></require><nav class=\"navbar navbar-light bg-faded d-flex flex-row justify-content-between\"><a class=\"navbar-brand\" route-href=\"home\"><img src=\"assets/moby.png\" height=\"45\" class=\"d-inline-block align-top logo\" alt=\"\"> Docker Demo</a><ul class=\"navbar-nav flex-row menu-list\"><li if.bind=\"!userLoggedIn\" class=\"nav-item\"><a class=\"nav-link pointer\" route-href=\"login\">Login</a></li><li if.bind=\"!userLoggedIn\" class=\"nav-item\"><a class=\"nav-link pointer\" route-href=\"register\">Register</a></li><li if.bind=\"userLoggedIn\" class=\"nav-item\"><a class=\"nav-link pointer\" click.delegate=\"logout()\">Logout</a></li></ul></nav><div class=\"container\"><router-view></router-view></div></template>"; });
 define('text!less/app.css', ['module'], function(module) { module.exports = ".logo {\n  margin-right: 16px;\n}\n.pointer {\n  cursor: pointer;\n}\n.menu-list li {\n  margin-right: 10px;\n}\n"; });
-define('text!login/login.html', ['module'], function(module) { module.exports = "<template><div class=\"container mt-5 w-75\"><div class=\"card card-outline-danger mb-3 text-center\"><div class=\"card-block\"><h3 class=\"card-title\">Log into Docker Demo!</h3><hr><form><div class=\"input-group\"><span class=\"input-group-addon\"><i class=\"fa fa-user\"></i></span> <input type=\"text\" class=\"form-control\" placeholder=\"Username\" value.bind=\"username\"></div><br><div class=\"input-group\"><span class=\"input-group-addon\"><i class=\"fa fa-lock\"></i></span> <input type=\"password\" class=\"form-control\" placeholder=\"Password\" value.bind=\"password\"></div><hr><button type=\"submit\" class=\"btn btn-lg btn-outline-danger pointer\" click.delegate=\"login()\">Log in</button></form></div><div class=\"card-block\"><a class=\"card-link text-muted float-left\" href=\"#\"><i class=\"fa fa-lock\"></i> Forgot your password?</a> <a class=\"card-link text-muted float-right\" href=\"#\">Create an account</a></div></div></div></template>"; });
+define('text!home/home.html', ['module'], function(module) { module.exports = "<template><div class=\"container mt-5 w-75\"><div class=\"card card-outline-danger mb-3 text-center\"><div class=\"card-block\"><h3 class=\"card-title\">Welcome!</h3></div></div></div></template>"; });
+define('text!login/login.html', ['module'], function(module) { module.exports = "<template><div class=\"container mt-5 w-75\"><div class=\"card card-outline-danger mb-3 text-center\"><div class=\"card-block\"><h3 class=\"card-title\">Log into Docker Demo!</h3><hr><form><div class=\"input-group\"><span class=\"input-group-addon\"><i class=\"fa fa-user\"></i></span> <input type=\"text\" class=\"form-control\" placeholder=\"Username\" value.bind=\"username\"></div><br><div class=\"input-group\"><span class=\"input-group-addon\"><i class=\"fa fa-lock\"></i></span> <input type=\"password\" class=\"form-control\" placeholder=\"Password\" value.bind=\"password\"></div><hr><button type=\"submit\" class=\"btn btn-lg btn-outline-danger pointer\" click.delegate=\"login()\">Log in</button></form></div><div class=\"card-block\"><a class=\"card-link text-muted float-left\" href=\"#\"><i class=\"fa fa-lock\"></i> Forgot your password?</a> <a class=\"card-link text-muted float-right\" route-href=\"register\">Create an account</a></div></div></div></template>"; });
+define('text!register/register.html', ['module'], function(module) { module.exports = "<template><div class=\"container mt-5 w-75\"><div class=\"card card-outline-danger mb-3 text-center\"><div class=\"card-block\"><h3 class=\"card-title\">Register new account</h3><hr><form><div class=\"input-group\"><span class=\"input-group-addon\"><i class=\"fa fa-user\"></i></span> <input type=\"text\" class=\"form-control\" placeholder=\"Username\" value.bind=\"username\"></div><br><div class=\"input-group\"><span class=\"input-group-addon\"><i class=\"fa fa-lock\"></i></span> <input type=\"password\" class=\"form-control\" placeholder=\"Password\" value.bind=\"password\"></div><br><div class=\"input-group\"><span class=\"input-group-addon\"><i class=\"fa fa-lock\"></i></span> <input type=\"password\" class=\"form-control\" placeholder=\"Confirm Password\" value.bind=\"confirmPassword\"></div><br><div class=\"input-group\"><div class=\"checkbox checkbox-primary\"><input id=\"checkbox-signup\" type=\"checkbox\" checked.bind=\"agreeToTerms\"> <label for=\"checkbox-signup\" class=\"ml-2\"><span>I accept <a class=\"text-primary pointer\">Terms and Conditions</a></span></label></div></div><hr><button type=\"submit\" class=\"btn btn-lg btn-outline-danger pointer\" click.delegate=\"register()\">Sign up</button></form></div><div class=\"card-block\"><a class=\"card-link text-muted\" href=\"#/login\">Already have an account?</a></div></div></div></template>"; });
 //# sourceMappingURL=app-bundle.js.map

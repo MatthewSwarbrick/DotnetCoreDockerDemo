@@ -19,6 +19,7 @@ export class App {
     config.addPipelineStep('authorize', AuthorizeStep);
     config.map([
       { route: '', moduleId: './home/home', name: 'home', title: 'Home', auth: true },
+      { route: 'register', moduleId: './register/register', name: 'register', title: 'Register' },
       { route: 'login', moduleId: './login/login', name: 'login', title: 'Login' }
     ]);
 

@@ -12,7 +12,7 @@
               <a class="nav-link pointer" route-href="login">Login</a>
           </li>
           <li if.bind="!userLoggedIn" class="nav-item">
-              <a class="nav-link pointer" href="#">Register</a>
+              <a class="nav-link pointer" route-href="register">Register</a>
           </li>
           <li if.bind="userLoggedIn" class="nav-item">
               <a class="nav-link pointer" click.delegate="logout()">Logout</a>
